@@ -197,6 +197,9 @@ returnCode=$?
 
 set -e
 if [[ "${format}" == "github" ]]; then
+  if [[ "$scanType" != "image" ]]; then
+      # TODO replace the manifest definition in the SBOM files by the docker image value
+  fi  
   if [[ "$(echo $githubPAT | xargs)" != "" ]]; then
     printf "\n Uploading GitHub Dependency Snapshot"
     curl -H 'Accept: application/vnd.github+json' -H "Authorization: token $githubPAT" 'https://api.github.com/repos/'$GITHUB_REPOSITORY'/dependency-graph/snapshots' -d @./$(echo $output | xargs)
