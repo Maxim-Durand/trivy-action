@@ -198,7 +198,8 @@ returnCode=$?
 set -e
 if [[ "${format}" == "github" ]]; then
   if [[ "$scanType" == "image" ]]; then
-    # TODO replace the manifest definition in the SBOM files by the docker image value
+    # Replace the manifest field shown in Github Dependency by the image name and tag
+    # See https://github.com/aquasecurity/trivy-action/issues/286 for more details
     source_location_regex="\"source_location\": \".*\""
     replace_with="\"source_location\": \"$artifactRef\""
     sed -i -e 's,'"$source_location_regex"','"$replace_with"',g' ./$(echo $output | xargs)
