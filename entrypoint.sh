@@ -198,7 +198,8 @@ returnCode=$?
 set -e
 if [[ "${format}" == "github" ]]; then
   if [[ "$scanType" != "image" ]]; then
-      # TODO replace the manifest definition in the SBOM files by the docker image value
+    # TODO replace the manifest definition in the SBOM files by the docker image value
+    sed -i -e 's/"source_location": ".*"/"source_location": "${artifactRef}"/g' ./$(echo $output | xargs)
   fi  
   if [[ "$(echo $githubPAT | xargs)" != "" ]]; then
     printf "\n Uploading GitHub Dependency Snapshot"
