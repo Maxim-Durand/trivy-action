@@ -197,7 +197,7 @@ returnCode=$?
 
 set -e
 if [[ "${format}" == "github" ]]; then
-  if [[ "$scanType" != "image" ]]; then
+  if [[ "$scanType" == "image" ]]; then
     # TODO replace the manifest definition in the SBOM files by the docker image value
     sed -i -e 's/"source_location": ".*"/"source_location": "${artifactRef}"/g' ./$(echo $output | xargs)
     cat ./$(echo $output | xargs)
